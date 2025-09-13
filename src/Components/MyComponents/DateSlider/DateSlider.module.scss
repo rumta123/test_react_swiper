@@ -72,9 +72,9 @@ $size-arrow-icon: 20px;
   }
 
   // Активное состояние (по желанию)
-  &:active:not(:disabled) {
-    transform: scale(0.95);
-  }
+  // &:active:not(:disabled) {
+  //   transform: scale(0.95);
+  // }
 }
 
 // === Swiper-обёртка ===
