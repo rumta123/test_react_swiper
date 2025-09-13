@@ -1,7 +1,7 @@
 // src/components/DynamicLabel/DynamicLabel.tsx
 import { useSelector } from 'react-redux';
 import type { RootState } from "../../../store/store";
-import styles from "../../../Components/Dectop/Desktop.module.css";
+import styles from "../../../Components/Dectop/Desktop.module.scss";
 // import styles from './DynamicLabel.module.css';
 
 // 🔢 Маппинг: id точки → нужный текст

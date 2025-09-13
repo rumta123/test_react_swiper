@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../Dectop/Desktop.module.css";
+import styles from "../Dectop/Desktop.module.scss"
 // import { useIsMobile } from "../../hooks/useIsMobile";
 import {
   CirclePoints,

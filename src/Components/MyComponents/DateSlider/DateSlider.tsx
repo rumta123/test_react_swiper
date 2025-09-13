@@ -10,7 +10,7 @@ import type { Swiper as SwiperType } from "swiper";
 import "../../../../node_modules/swiper/swiper.min.css";
 import "../../../../node_modules/swiper/modules/effect-fade.css";
 
-import styles from "./DateSlider.module.css";
+import styles from "./DateSlider.module.scss";
 import Vector2 from "../../../assets/Vector 2.svg";
 import { ArrowButton } from "./ArrowButton";
 

@@ -1,0 +1,131 @@
+// === Переменные ===
+$bg-body: #fff;
+$text-light: #e6eef8;
+$text-dark: #04203a;
+$primary-fill: #fff;
+$primary-stroke: #000;
+$hint-bg: rgba(255, 255, 255, 0.04);
+$indicator-size: 32px;
+
+$font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial;
+$font-size-hint: 13px;
+$font-size-label: 12px;
+$font-weight-bold: 600;
+
+$transition-opacity: opacity 0.2s ease;
+$transition-radius: r 0.2s ease;
+
+// === Глобальные стили ===
+:root {
+  --size: auto;
+}
+
+body {
+  font-family: $font-family;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-body;
+  color: $text-light;
+}
+
+// === Обёртка для SVG ===
+.wrap {
+  // width: var(--size);
+  // height: var(--size);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+// === SVG ===
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+// === Точки на диаграмме/карте ===
+.point {
+  cursor: pointer;
+  opacity: 1;
+  transition: $transition-opacity;
+
+  // Круг точки
+  circle {
+    fill: $primary-fill;
+    stroke: $primary-stroke;
+    stroke-width: 2;
+    transition: $transition-radius;
+  }
+
+  // Текст метки (скрыт по умолчанию)
+  text {
+    font-size: $font-size-label;
+    fill: $text-dark;
+    font-weight: $font-weight-bold;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    opacity: 0;
+    transition: $transition-opacity;
+  }
+
+  // Показываем текст при наведении
+  &:hover {
+    text {
+      opacity: 1;
+    }
+  }
+}
+
+// Особое поведение для "фиксированных" точек
+.point.fixed-point:hover circle {
+  r: 1; // Не увеличивается при ховере
+}
+
+// === Центральное изображение (например, логотип или иконка) ===
+.centerImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background-image: url('https://c.animaapp.com/E93a9PUr/img/group-3048.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none; // Не мешает взаимодействию с другими элементами
+  z-index: 10;
+}
+
+// === Подсказка внизу экрана ===
+.hint {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  background: $hint-bg;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: $font-size-hint;
+}
+
+// === Индикатор сверху (статичный кружок) ===
+#topIndicator {
+  position: absolute;
+  top: 34%;
+  left: calc(50% + 110px);
+  transform: translateY(-50%);
+  width: $indicator-size;
+  height: $indicator-size;
+  border-radius: 50%;
+  background: $primary-fill;
+  border: 1px solid $primary-stroke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-label;
+  color: $text-dark;
+  pointer-events: none; // Только визуальный элемент
+}

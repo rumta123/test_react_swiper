@@ -17,8 +17,8 @@ import '../../../../node_modules/swiper/modules/pagination.scss'
 
 
 import type { SwiperClass } from "swiper/react";
-import styles from '../../../Components/Dectop/Desktop.module.css';
-import "../EventSlider/EventSlider.module.css";
+import styles from '../../../Components/Dectop/Desktop.module.scss';
+import "../EventSlider/EventSlider.module.scss";
 // 🔹 Redux: RootState и actions
 import type { RootState } from '../../../store/store';
 interface EventSliderProps {

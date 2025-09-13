@@ -1,0 +1,28 @@
+// === Переменные (если ещё не определены) ===
+$font-pt-sans: "PT Sans", Helvetica, sans-serif;
+$color-text: #000c3e;
+$color-border: #ccc;
+$color-bg: #fff;
+
+$font-size-small: 20px;
+$line-height-small: 30px;
+
+// === Класс .smallText ===
+.smallText {
+  position: absolute;
+  font-family: $font-pt-sans;
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+  color: $color-text;
+  font-weight: normal;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 20px; // ⚠️ внимание: padding больше размера блока!
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: 50%;
+}

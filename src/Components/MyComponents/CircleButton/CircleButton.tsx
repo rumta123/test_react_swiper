@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from "../../../store/store";
-import styles from "./CircleButton.module.css";
+import styles from "./CircleButton.module.scss";
 
 interface CircleButtonProps {
   className?: string;

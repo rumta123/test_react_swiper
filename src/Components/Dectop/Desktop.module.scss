@@ -1,0 +1,204 @@
+// === Переменные ===
+$bg-white: #ffffff;
+$color-blue: #5d5fef;
+$color-pink: #ef5da8;
+$color-black-blue: #42567a;
+$color-gray-border: rgba(48, 62, 88, 0.5);
+$color-white-smoke: #f4f5f9;
+$color-shadow: rgba(56, 119, 238, 0.1);
+
+$font-pt-sans: 'PT Sans', Helvetica, sans-serif;
+$font-bebas-neue: 'Bebas Neue', Helvetica, sans-serif;
+
+$width-container: 1920px;
+$height-screen: 1080px;
+$vh-100: 100vh;
+
+// === Стили ===
+.wrapper {
+  background: $bg-white;
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  width: 100vw;
+}
+
+.container {
+  background: $bg-white;
+  width: $width-container;
+  height: $vh-100;
+}
+
+.background {
+  position: relative;
+  height: $height-screen;
+  background: url('https://c.animaapp.com/E93a9PUr/img/rectangle-1.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.groupImage {
+  position: absolute;
+  width: 1441px;
+  height: $height-screen;
+  top: 0;
+  left: 320px;
+}
+
+.years {
+  position: absolute;
+  top: 399px;
+  left: 537px;
+  font-family: $font-pt-sans;
+  font-weight: bold;
+  font-size: 200px;
+  line-height: 160px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: -4px;
+}
+
+// Отдельные классы для цветов
+.yearBlue {
+  color: $color-blue;
+  letter-spacing: -8px;
+}
+
+.yearPink {
+  color: $color-pink;
+  letter-spacing: -8px;
+}
+
+.dateSliderPosition {
+  position: relative;
+  top: -287px;
+  left: 383px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.maskImage {
+  position: absolute;
+  width: 536px;
+  height: 530px;
+  top: 215px;
+  left: 772px;
+}
+
+.labelScience {
+  position: absolute;
+  top: 227px;
+  left: 1196px;
+  font-family: $font-pt-sans;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000c3e;
+  white-space: nowrap;
+}
+
+.block {
+  position: absolute;
+  width: 324px;
+  height: 135px;
+
+  &Text {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    font-family: $font-pt-sans;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000c3e;
+    font-weight: normal;
+    width: 320px;
+  }
+
+  &Year {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: $font-bebas-neue;
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: normal;
+  }
+}
+
+.circle {
+  position: absolute;
+  top: 251px;
+  left: 1126px;
+  width: 56px;
+  height: 56px;
+  background: $color-white-smoke;
+  border: 1px solid $color-gray-border;
+  border-radius: 50%;
+  transform: rotate(90deg);
+}
+
+.title {
+  position: absolute;
+  width: 353px;
+  height: 134px;
+  left: 400px;
+  top: 170px;
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 120%;
+  color: $color-black-blue;
+}
+
+.vectorLine {
+  position: absolute;
+  width: 5px;
+  height: 120px;
+  top: 177px;
+  left: 320px;
+}
+
+.roundBtn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 882px;
+  left: 1680px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 15px $color-shadow;
+}
+
+.roundArrow {
+  position: absolute;
+  width: 7px;
+  height: 11px;
+  top: 896px;
+  left: 1697px;
+}
+
+.dateBlock {
+  position: absolute;
+  width: 122px;
+  height: 88px;
+  top: 697px;
+  left: 400px;
+
+  .dateLabel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: $font-pt-sans;
+    font-size: 14px;
+    color: $color-black-blue;
+  }
+
+  .icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 38px;
+    left: 70px;
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Mobile.module.css";
+import styles from "./Mobile.module.scss";
 import { DateInterval, DateSlider, EventSlider, MyTitle } from "../MyComponents";
 
 export const Mobile: React.FC = () => {

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from "../../../store/store";
-import styles from "../../../Components/Dectop/Desktop.module.css";
+import styles from "../../../Components/Dectop/Desktop.module.scss";
 
 
 

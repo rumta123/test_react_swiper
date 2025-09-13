@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./DateSlider.module.css";
+import styles from "./DateSlider.module.scss";
 
 interface ArrowButtonProps {
   direction: "next" | "prev";

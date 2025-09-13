@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import gsap from "gsap";
-import styles from "./CirclePoints.module.css";
+import styles from "./CirclePoints.module.scss";
 import type { RootState } from "../../../store/store";
 import { selectPoint } from "../../../store/pointSlice";
 

@@ -1,0 +1,112 @@
+// === Переменные ===
+$color-text-primary: #000;
+$color-text-secondary: #42567a;
+$color-bg-overlay: rgba(255, 255, 255, 0.1);
+$color-bg-button: #fff;
+$color-accent: #3877ee; // можно использовать для hover, если нужно
+
+$font-main: Arial, sans-serif;
+$font-pt-sans: 'PT Sans', sans-serif;
+
+$border-radius-pill: 24px;
+$border-radius-circle: 50%;
+
+$transition-default: all 0.2s ease;
+$transition-opacity: opacity 0.2s ease;
+
+$size-button: 40px;
+$size-arrow-icon: 20px;
+
+// === Основной контейнер слайдера дат ===
+.dateSlider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: $color-bg-overlay;
+  border-radius: $border-radius-pill;
+  font-family: $font-main;
+  position: relative;
+  width: fit-content;
+
+  .arrows {
+    display: flex;
+    gap: 8px; // расстояние между кнопками
+  }
+
+  .currentDate {
+    font-family: $font-pt-sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: $color-text-secondary;
+  }
+}
+
+// === Кнопки-стрелки ===
+.arrowButton {
+  background: none;
+  border: none;
+  font-size: $size-arrow-icon;
+  cursor: pointer;
+  color: $color-text-primary;
+  opacity: 0.7;
+  transition: $transition-default;
+  width: $size-button;
+  height: $size-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-button;
+  border-radius: $border-radius-circle;
+
+  &:hover:not(:disabled) {
+    opacity: 1;
+    // transform: scale(1.1); // закомментировано как в оригинале
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  // Активное состояние (по желанию)
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}
+
+// === Swiper-обёртка ===
+.swiperWrapper {
+  width: 120px;
+  overflow: hidden;
+}
+
+.swiperSlide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// === Блок даты ===
+.dateBlock {
+  text-align: center;
+
+  .dateLabel {
+    font-size: 18px;
+    font-weight: 700;
+    color: $color-text-primary;
+    margin: 0;
+  }
+}
+
+// === Позиционирование стрелок через order и поворот ===
+.arrowPrev {
+  order: -1; // слева от слайдера
+}
+
+.arrowNext {
+  order: 1; // справа от слайдера
+  transform: rotate(180deg); // чтобы стрелка смотрела вперёд
+}
