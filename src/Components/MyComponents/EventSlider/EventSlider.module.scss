@@ -39,10 +39,29 @@
 :global(.swiper-button-prev.swiper-button-disabled) {
   display: none;
 }
+:global(.swiper-pagination) {
+  display: block !important;
+  position: relative !important; // если нужно явно
+  bottom: 0 !important;
+}
 
+:global(.swiper-pagination-bullet) {
+  display: inline-block !important;
+  background: #000 !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+}
 // Пагинация на больших экранах
-@media (min-width: 1025px) {
-  :global(.swiper-pagination) {
+
+
+:global(.custom-pagination) {
+  display: block !important;
+}
+
+// Десктоп > 1024px — скрываем
+@media (min-width: 1024px) {
+  :global(.custom-pagination) {
     display: none !important;
   }
 }

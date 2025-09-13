@@ -1,22 +1,14 @@
-// src/components/EventSlider/EventSliderWithSwiper.tsx
-
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay,Pagination } from 'swiper/modules';
 
 // 🔹 Импорт стилей Swiper
-import '../../../../node_modules/swiper/swiper.scss';
-import '../../../../node_modules/swiper/modules/autoplay.scss';
-import '../../../../node_modules/swiper/modules/navigation.scss';
-import '../../../../node_modules/swiper/modules/pagination.scss'
-
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
-
-
 import type { SwiperClass } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import styles from '../../../Components/Dectop/Desktop.module.scss';
 import "../EventSlider/EventSlider.module.scss";
 // 🔹 Redux: RootState и actions
@@ -212,18 +204,22 @@ export const EventSlider = ({ className, top, left='143px', slidesPerView = 3  }
 
       {/* Swiper слайдер - теперь показывает события выбранной точки */}
       <Swiper
-        breakpoints={{
-    320: { slidesPerView: 2  },   // телефоны
-    768: { slidesPerView: 2 },   // планшеты
-    1024: { slidesPerView: 3  },  // десктопы
-  }}
+  //       breakpoints={{
+  //   320: { slidesPerView: 2  },   // телефоны
+  //   768: { slidesPerView: 2 },   // планшеты
+  //   1024: { slidesPerView: 3  },  // десктопы
+  // }}
+
+   
         modules={[Navigation, Autoplay, Pagination]}
         navigation
-        pagination={{ clickable: true }}
+          pagination={{ el: ".custom-pagination", clickable: true }}
         // autoplay={{ delay: 5000, disableOnInteraction: false }}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
+      
+
         onSlideChange={handleSlideChange}
         slidesPerView={slidesPerView}
         spaceBetween={3}
@@ -233,7 +229,7 @@ export const EventSlider = ({ className, top, left='143px', slidesPerView = 3  }
     position: "relative",  left  }}
       >
         {currentPointEvents.map((event, index) => (
-          <SwiperSlide key={`${currentPointId}-${index}`}>
+          <SwiperSlide key={`${currentPointId}-${index}`}  style={{ width: '150px' }}>
             <div className={styles.block}>
               <p className={styles.blockText}>{event.text}</p>
               <div className={styles.blockYear}>{event.year}</div>
@@ -242,7 +238,7 @@ export const EventSlider = ({ className, top, left='143px', slidesPerView = 3  }
         ))}
       </Swiper>
 
-  
+  <div className="custom-pagination" />
     </div>
   );
 };
