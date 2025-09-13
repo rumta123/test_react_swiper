@@ -44,21 +44,35 @@ export const DateSlider: React.FC<DateSliderProps> = ({ style, className  }) => 
   );
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
-  useEffect(() => {
-    if (swiperInstance && selectedPoint) {
-      const index = 6 - selectedPoint.id;
-      if (index >= 0 && index < dateItems.length) {
-        swiperInstance.slideTo(index);
-      }
-    }
-  }, [selectedPoint, swiperInstance]);
+useEffect(() => {
+  if (swiperInstance && selectedPoint) {
+    let index = 6 - selectedPoint.id;
 
-  const handleSlideChange = (swiper: SwiperType) => {
-    const newIndex = swiper.activeIndex;
+    // Защита: индекс 0-5
+    index = Math.max(0, Math.min(dateItems.length - 1, index));
+
+    // Только если реально нужно переключиться
+    if (swiperInstance.activeIndex !== index) {
+      swiperInstance.slideTo(index, 300);
+    }
+  }
+}, [selectedPoint, swiperInstance]);
+
+const handleSlideChange = (swiper: SwiperType) => {
+  // ❗ Откладываем диспатч на следующий тик — чтобы activeIndex точно обновился
+  setTimeout(() => {
+    let newIndex = swiper.activeIndex;
+
+    // Защита от некорректных значений
+    newIndex = Math.max(0, Math.min(dateItems.length - 1, newIndex));
+
     const newId = 6 - newIndex;
-    const item: Point = { id: newId, label: String(newId) };
+    const clampedId = Math.max(1, Math.min(6, newId));
+
+    const item: Point = { id: clampedId, label: String(clampedId) };
     dispatch(selectPoint(item));
-  };
+  }, 0);
+};
 
   const handleSwiperInit = (swiper: SwiperType) => {
     setSwiperInstance(swiper);
@@ -77,18 +91,18 @@ export const DateSlider: React.FC<DateSliderProps> = ({ style, className  }) => 
 
       {/* Стрелки */}
       <div className={styles.arrows}>
-        <ArrowButton
-          direction="next"
-          onClick={() => swiperInstance?.slidePrev()}
-          icon={Vector2}
-          alt="Next"
-        />
-        <ArrowButton
-          direction="prev"
-          onClick={() => swiperInstance?.slideNext()}
-          icon={Vector2}
-          alt="Prev"
-        />
+       <ArrowButton
+  direction="prev" // ← стрелка ВЛЕВО (назад)
+  onClick={() => swiperInstance?.slidePrev()} // ← листаем НАЗАД
+  icon={Vector2}
+  alt="Previous"
+/>
+<ArrowButton
+  direction="next" // ← стрелка ВПРАВО (вперёд)
+  onClick={() => swiperInstance?.slideNext()} // ← листаем ВПЕРЁД
+  icon={Vector2}
+  alt="Next"
+/>
       </div>
 
       {/* Слайдер */}

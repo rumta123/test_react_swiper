@@ -13,7 +13,7 @@ export const Mobile: React.FC = () => {
 
         <MyTitle className={styles.textWrapper}/>
 
-<EventSlider className={styles.group2} left={0} slidesPerView={2}/>
+<EventSlider  className={styles.group2} left={0} slidesPerView={2} width="300px"  height="166px" />
         <img
           className={styles.vector}
           alt="Vector"

@@ -1,14 +1,14 @@
 // Кнопки Swiper
 :global(.swiper-button-prev),
 :global(.swiper-button-next) {
-  width: 40px;
-  height: 40px;
+  width: 40px!important;
+  height: 40px!important;
   border-radius: 50%;
   background: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+display: flex;
 
-  display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1; // показываем
@@ -18,7 +18,7 @@
 
   &::after {
     font-family: swiper-icons;
-    font-size: 16px;
+    font-size: 16px!important;
     font-weight: 900;
     color: #3877ee;
     position: static;
@@ -59,9 +59,21 @@
   display: block !important;
 }
 
+
 // Десктоп > 1024px — скрываем
 @media (min-width: 1024px) {
   :global(.custom-pagination) {
     display: none !important;
   }
+
+
+}
+
+
+@media(max-width:800px){
+    :global(.swiper-button-prev),
+:global(.swiper-button-next){
+  display: none!important;
+}
+
 }

@@ -18,6 +18,8 @@ interface EventSliderProps {
   top?: string | number; 
   left?: string | number; 
   slidesPerView?: number;
+  width?: string | number; 
+  height?: string | number; 
 }
 
 // 🔹 Данные событий
@@ -174,7 +176,7 @@ const eventsByPoint = [
   }
 ];
 
-export const EventSlider = ({ className, top, left='143px', slidesPerView = 3  }: EventSliderProps) => {
+export const EventSlider = ({ className, top, left='143px', slidesPerView = 3, width="1440px", height="200px"  }: EventSliderProps) => {
 
   const swiperRef = useRef<SwiperClass | null>(null);
   const selectedPoint = useSelector(
@@ -204,11 +206,11 @@ export const EventSlider = ({ className, top, left='143px', slidesPerView = 3  }
 
       {/* Swiper слайдер - теперь показывает события выбранной точки */}
       <Swiper
-  //       breakpoints={{
-  //   320: { slidesPerView: 2  },   // телефоны
-  //   768: { slidesPerView: 2 },   // планшеты
-  //   1024: { slidesPerView: 3  },  // десктопы
-  // }}
+        breakpoints={{
+    320: { slidesPerView: 2  },   // телефоны
+    768: { slidesPerView: 2 },   // планшеты
+    1024: { slidesPerView: 3  },  // десктопы
+  }}
 
    
         modules={[Navigation, Autoplay, Pagination]}
@@ -225,7 +227,7 @@ export const EventSlider = ({ className, top, left='143px', slidesPerView = 3  }
         spaceBetween={3}
 
 
-        style={{ width: "1440px", height: "200px", margin: "0 auto" ,  marginTop: "320px",
+        style={{ width, height, margin: "0 auto" ,  marginTop: "320px",
     position: "relative",  left  }}
       >
         {currentPointEvents.map((event, index) => (

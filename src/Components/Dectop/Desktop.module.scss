@@ -202,7 +202,8 @@ $vh-100: 100vh;
     left: 70px;
   }
 }
-
-// .blockText{
-//   width: 150px;
-// }
+@media (max-width:768px) {
+  .blockText{
+  width: 100px;
+}
+}
