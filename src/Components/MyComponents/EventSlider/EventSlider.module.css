@@ -1,0 +1,52 @@
+/* Кнопки */
+:global(.swiper-button-prev),
+:global(.swiper-button-next) {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1; /* показываем */
+}
+
+/* Стрелки внутри кнопок */
+:global(.swiper-button-prev::after),
+:global(.swiper-button-next::after) {
+  font-family: swiper-icons;
+  font-size: 16px;
+  font-weight: 900;
+  color: #3877ee;
+  position: static; /* убрал твои сдвиги */
+  line-height: 1;
+}
+:global(.swiper-button-prev),
+:global(.swiper-button-next) {
+  top: 50%;         /* стандарт */
+  transform: translateY(-150%); /* поднимет ещё выше */
+  right: 10px;;
+}
+/* :global(.swiper-button-disabled),
+:global(.swiper-button-disabled::after) {
+  display: none !important;
+} */
+
+
+
+:global(.swiper-button-next) {
+  right: 7%; /* сместить ближе к центру */
+}
+:global(.swiper-button-prev.swiper-button-disabled){
+  display: none;
+}
+
+
+@media (min-width: 1025px) {
+  :global(.swiper-pagination) {
+    display: none !important;
+  }
+}

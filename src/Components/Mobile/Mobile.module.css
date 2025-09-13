@@ -1,0 +1,255 @@
+:root {
+  --black-blue: #000033; /* пример, замени на нужный цвет */
+  --x-5gw-JAU: #ff9900;  /* пример, замени на нужный цвет */
+}
+.mobile {
+  align-items: start;
+  background-color: #f4f5f9;
+  display: grid;
+  justify-items: center;
+  width: 100vw;
+}
+
+.div {
+  background-color: #f4f5f9;
+  height: 568px;
+  overflow: hidden;
+  position: relative;
+  min-width: 320px;
+}
+
+.group {
+  height: 6px;
+  left: 117px;
+  position: absolute;
+  top: 530px;
+  width: 86px;
+}
+
+.ellipse {
+  background-color: var(--black-blue);
+  border-radius: 3px;
+  height: 6px;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.ellipse2 {
+  background-color: var(--black-blue);
+  border-radius: 3px;
+  height: 6px;
+  left: 16px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.ellipse3 {
+  background-color: var(--black-blue);
+  border-radius: 3px;
+  height: 6px;
+  left: 32px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.ellipse4 {
+  background-color: var(--black-blue);
+  border-radius: 3px;
+  height: 6px;
+  left: 48px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.ellipse5 {
+  background-color: var(--black-blue);
+  border-radius: 3px;
+  height: 6px;
+  left: 64px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.ellipse6 {
+  background-color: var(--black-blue);
+  border-radius: 3px;
+  height: 6px;
+  left: 80px;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.textWrapper {
+  color: var(--black-blue);
+  font-family: "PT Sans", Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  left: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: absolute;
+  top: 58px;
+}
+
+.group2 {
+  height: 114px;
+  left: 20px;
+  position: absolute;
+  /* top: 313px;
+  width: 744px; */
+}
+
+.p {
+  color: var(--black-blue);
+  font-family: "PT Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 471px;
+  letter-spacing: 0;
+  line-height: 20.3px;
+  position: absolute;
+  top: 34px;
+  width: 261px;
+}
+
+.textWrapper2 {
+  color: var(--x-5gw-JAU);
+  font-family: "Bebas Neue", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 471px;
+  line-height: 19.2px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.textWrapper3 {
+  color: var(--black-blue);
+  font-family: "PT Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 0;
+  line-height: 20.3px;
+  position: absolute;
+  top: 34px;
+  width: 166px;
+}
+
+.textWrapper4 {
+  color: var(--x-5gw-JAU);
+  font-family: "Bebas Neue", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 0;
+  line-height: 19.2px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.textWrapper5 {
+  color: var(--black-blue);
+  font-family: "PT Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 191px;
+  line-height: 20.3px;
+  opacity: 0.4;
+  position: absolute;
+  top: 34px;
+  width: 255px;
+}
+
+.textWrapper6 {
+  color: var(--x-5gw-JAU);
+  font-family: "Bebas Neue", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 191px;
+  line-height: 19.2px;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.vector {
+  height: 1px;
+  left: 20px;
+  object-fit: cover;
+  position: absolute;
+  top: 292px;
+  width: 280px;
+}
+
+.element {
+  color: transparent;
+  font-family: "PT Sans", Helvetica;
+  font-size: 56px;
+  font-weight: 700;
+  left: 20px;
+  letter-spacing: -1.12px;
+  line-height: normal;
+  position: absolute;
+  top: 162px;
+}
+
+.span {
+  color: #3877ee;
+  letter-spacing: -0.63px;
+}
+
+.textWrapper7 {
+  color: #f178b6;
+  letter-spacing: -0.63px;
+}
+
+.group3 {
+  height: 50px;
+  left: 20px;
+  position: absolute;
+  top: 505px;
+  width: 60px;
+}
+
+.textWrapper8 {
+  color: #42557a;
+  font-family: "PT Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  width: 41px;
+}
+
+.img {
+  height: 25px;
+  left: 33px;
+  position: absolute;
+  top: 25px;
+  width: 25px;
+}
+
+.group4 {
+  height: 25px;
+  left: 0;
+  position: absolute;
+  top: 25px;
+  width: 25px;
+}

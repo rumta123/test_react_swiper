@@ -1,0 +1,97 @@
+ :root {
+        --size: auto;
+      }
+      body {
+        font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        color: #e6eef8;
+      }
+      .wrap {
+        /* width: var(--size);
+        height: var(--size); */
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+      .point {
+        cursor: pointer;
+        opacity: 1; /* явно задаём */
+        transition: opacity 0.2s ease; /* плавное появление/исчезновение */
+      }
+      .point circle {
+        fill: #fff;
+        stroke: #000;
+        stroke-width: 2;
+        transition: r 0.2s ease;
+      }
+
+      .centerImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background-image: url('https://c.animaapp.com/E93a9PUr/img/group-3048.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none; /* чтобы не мешало кликам */
+  z-index: 10;
+}
+      .point text {
+        font-size: 12px;
+        fill: #04203a;
+        font-weight: 600;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      /* .point:hover circle {
+        r: 30;
+      } */
+      .point:hover text {
+        opacity: 1;
+      }
+      .hint {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      /* Статичный кружок наверху */
+      #topIndicator {
+        position: absolute;
+        top: 34%;
+        left: calc(50% + 110px);
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 12px;
+        color: #04203a;
+        pointer-events: none;
+      }
+
+      .point.fixed-point:hover circle {
+        r: 1; /* не увеличивается */
+      }
