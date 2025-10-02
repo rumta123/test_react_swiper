@@ -76,4 +76,7 @@ display: flex;
   display: none!important;
 }
 
+  :global(.swiper-slide div) {
+    height: 600px;
+  }
 }

@@ -7,10 +7,10 @@ $color-gray-border: rgba(48, 62, 88, 0.5);
 $color-white-smoke: #f4f5f9;
 $color-shadow: rgba(56, 119, 238, 0.1);
 
-$font-pt-sans: 'PT Sans', Helvetica, sans-serif;
-$font-bebas-neue: 'Bebas Neue', Helvetica, sans-serif;
+$font-pt-sans: "PT Sans", Helvetica, sans-serif;
+$font-bebas-neue: "Bebas Neue", Helvetica, sans-serif;
 
-$width-container: 1920px;
+$width-container: 100vw;
 $height-screen: 1080px;
 $vh-100: 100vh;
 
@@ -20,7 +20,8 @@ $vh-100: 100vh;
   display: grid;
   justify-items: center;
   align-items: start;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
@@ -32,7 +33,8 @@ $vh-100: 100vh;
 .background {
   position: relative;
   height: $height-screen;
-  background: url('https://c.animaapp.com/E93a9PUr/img/rectangle-1.png') no-repeat;
+  background: url("https://c.animaapp.com/E93a9PUr/img/rectangle-1.png")
+    no-repeat;
   background-size: 100% 100%;
 }
 
@@ -50,7 +52,7 @@ $vh-100: 100vh;
   left: 537px;
   font-family: $font-pt-sans;
   font-weight: bold;
-  font-size: 200px;
+  font-size: clamp(60px, 12vw, 200px);
   line-height: 160px;
   text-align: center;
   white-space: nowrap;
@@ -143,7 +145,7 @@ $vh-100: 100vh;
   height: 134px;
   left: 400px;
   top: 170px;
-  font-family: 'PT Sans';
+  font-family: "PT Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 56px;
@@ -202,8 +204,13 @@ $vh-100: 100vh;
     left: 70px;
   }
 }
-@media (max-width:768px) {
-  .blockText{
-  width: 100px;
+@media (max-width: 1300px) {
+  .maskImage {
+    display: none;
+  }
 }
+@media (max-width: 768px) {
+  .blockText {
+    width: 100px;
+  }
 }
