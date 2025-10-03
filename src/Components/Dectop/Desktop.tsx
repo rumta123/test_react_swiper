@@ -51,7 +51,7 @@ export const Desktop: React.FC = () => {
 {/* наука и тд  */}
             <DynamicLabel />
             {/* слайд свайпер 01/01  и тд  */}
-            <EventSlider />
+            <EventSlider className={styles.group2}/>
 
       
 {/* Историч события */}
