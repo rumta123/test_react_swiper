@@ -6,8 +6,8 @@ import styles from "../../../Components/Dectop/Desktop.module.scss";
 
 // Тип для интервалов дат
 interface DateInterval {
-  startYear: number;
-  endYear: number;
+  startYear: number|string;
+  endYear: number|string;
   startColor: string;
   endColor: string;
  
@@ -21,12 +21,12 @@ export const DateInterval = ({ className  }: DateInterval1) => {
   
 
   const dateIntervals: Record<number, DateInterval> = {
-    6: { startYear: 2015, endYear: 2022, startColor: 'blue', endColor: 'pink' },
-    2: { startYear: 2016, endYear: 2023, startColor: 'blue', endColor: 'pink' },
-    3: { startYear: 2017, endYear: 2024, startColor: 'blue', endColor: 'pink' },
-    4: { startYear: 2018, endYear: 2025, startColor: 'blue', endColor: 'pink' },
-    5: { startYear: 2019, endYear: 2026, startColor: 'blue', endColor: 'pink' },
-    1: { startYear: 2020, endYear: 2027, startColor: 'blue', endColor: 'pink' },
+    6: { startYear: 'Сай', endYear: 'ты', startColor: 'blue', endColor: 'pink' },
+    2: { startYear: 'Парсе', endYear: 'ры', startColor: 'blue', endColor: 'pink' },
+    3: { startYear: 'Нейрон', endYear: 'ки', startColor: 'blue', endColor: 'pink' },
+    4: { startYear: 'Прило', endYear: 'жения', startColor: 'blue', endColor: 'pink' },
+    5: { startYear: 'Бо', endYear: 'ты', startColor: 'blue', endColor: 'pink' },
+    1: { startYear: 'Срм', endYear: 'ки', startColor: 'blue', endColor: 'pink' },
   };
 
   // Получаем интервал для выбранной точки или используем точку 6 по умолчанию
@@ -37,7 +37,7 @@ export const DateInterval = ({ className  }: DateInterval1) => {
 
       <p className={className}>
         <span className={styles[`year${interval.startColor.charAt(0).toUpperCase() + interval.startColor.slice(1)}`]}>
-          {interval.startYear}&nbsp;&nbsp;
+          {interval.startYear}
         </span>
         <span className={styles[`year${interval.endColor.charAt(0).toUpperCase() + interval.endColor.slice(1)}`]}>
           {interval.endYear}

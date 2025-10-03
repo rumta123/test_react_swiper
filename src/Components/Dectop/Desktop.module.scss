@@ -126,6 +126,7 @@ $vh-100: 100vh;
     font-size: 25px;
     line-height: 30px;
     font-weight: normal;
+    color: #ef5da8;
   }
 }
 
@@ -215,4 +216,19 @@ $vh-100: 100vh;
   .blockText {
     width: 100px;
   }
+  .yearBlue {
+
+  letter-spacing: 0px;
+}
+.blockYear{
+  font-size: 18px;
+}
+.blockText{
+  font-size: 16px;
+  overflow-wrap: break-word;
+}
+.yearPink {
+  color: $color-pink;
+  letter-spacing: 0px;
+}
 }
