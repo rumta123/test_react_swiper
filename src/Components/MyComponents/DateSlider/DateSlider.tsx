@@ -4,7 +4,7 @@ import type { RootState } from "../../../store/store";
 import { selectPoint } from "../../../store/pointSlice";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade } from "swiper/modules";
+// import { EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 
 import "../../../../node_modules/swiper/swiper.min.css";
@@ -46,12 +46,11 @@ export const DateSlider: React.FC<DateSliderProps> = ({ style, className  }) => 
 
 useEffect(() => {
   if (swiperInstance && selectedPoint) {
-    let index = 6 - selectedPoint.id;
+    let index = selectedPoint.id - 1; // ✅ теперь прямое соответствие
 
     // Защита: индекс 0-5
     index = Math.max(0, Math.min(dateItems.length - 1, index));
 
-    // Только если реально нужно переключиться
     if (swiperInstance.activeIndex !== index) {
       swiperInstance.slideTo(index, 300);
     }
@@ -59,17 +58,14 @@ useEffect(() => {
 }, [selectedPoint, swiperInstance]);
 
 const handleSlideChange = (swiper: SwiperType) => {
-  // ❗ Откладываем диспатч на следующий тик — чтобы activeIndex точно обновился
   setTimeout(() => {
-    let newIndex = swiper.activeIndex;
+    let newIndex = swiper.realIndex;
 
-    // Защита от некорректных значений
     newIndex = Math.max(0, Math.min(dateItems.length - 1, newIndex));
 
-    const newId = 6 - newIndex;
-    const clampedId = Math.max(1, Math.min(6, newId));
+    const newId = newIndex + 1; // ✅ теперь 0 → 1, 5 → 6
 
-    const item: Point = { id: clampedId, label: String(clampedId) };
+    const item: Point = { id: newId, label: String(newId) };
     dispatch(selectPoint(item));
   }, 0);
 };
@@ -79,10 +75,10 @@ const handleSlideChange = (swiper: SwiperType) => {
   };
 
   // Текущая дата сверху
-  const currentDate =
-    selectedPoint?.id
-      ? dateItems[6 - selectedPoint.id]?.date
-      : dateItems[0].date;
+const currentDate =
+  selectedPoint?.id
+    ? dateItems[selectedPoint.id - 1]?.date // ✅ прямое соответствие
+    : dateItems[0].date;
 
   return (
 <div className={`${styles.dateSlider} ${className || ""}`} style={style}>
@@ -106,18 +102,15 @@ const handleSlideChange = (swiper: SwiperType) => {
       </div>
 
       {/* Слайдер */}
-      <Swiper
-        modules={[EffectFade]}
-        spaceBetween={0}
-        slidesPerView={1}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        onSwiper={handleSwiperInit}
-        onSlideChange={handleSlideChange}
-        noSwiping={true}
-        allowTouchMove={false}
-        className={styles.swiperWrapper}
-      >
+<Swiper
+  spaceBetween={0}
+  slidesPerView={1}
+  onSwiper={handleSwiperInit}
+  onSlideChange={handleSlideChange}
+  noSwiping={true}
+  allowTouchMove={false}
+  className={styles.swiperWrapper}
+>
         {dateItems.map((_item, i) => (
           <SwiperSlide key={i} className={styles.swiperSlide}>
             {/* Можно оставить пустым или добавить контент слайда */}

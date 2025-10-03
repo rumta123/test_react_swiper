@@ -76,7 +76,11 @@ display: flex;
   display: none!important;
 }
 
-  :global(.swiper-slide div) {
+  :global(.swiper-slide div)
+  :global(.swiper-wrapper) {
     height: 600px;
+  }
+  :global(.swiper){
+   height: 380px!important
   }
 }
