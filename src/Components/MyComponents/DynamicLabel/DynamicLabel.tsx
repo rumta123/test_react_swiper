@@ -19,7 +19,7 @@ export const DynamicLabel = () => {
   const selectedPoint = useSelector((state: RootState) => state.point.selectedPoint);
 
   // Определяем текст. Если ничего не выбрано — по умолчанию "Наука"
-  const displayText = selectedPoint ? labelMap[selectedPoint.id] || 'Неизвестно' : 'Наука';
+  const displayText = selectedPoint ? labelMap[selectedPoint.id] || 'Неизвестно' : 'Стильные';
 
   return (
     <div className={styles.labelScience}>
