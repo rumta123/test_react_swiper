@@ -14,7 +14,7 @@ import {
 // Константы для размеров и позиционирования
 const CIRCLE_RADIUS = 210;
 const CIRCLE_VIEWBOX = 240;
-
+import bgImage from '../../assets/group-3048.png';
 
 
 const CIRCLE_BUTTON_POSITION = {
@@ -31,7 +31,7 @@ export const Desktop: React.FC = () => {
           {/* Фоновое изображение */}
           <img
             className={styles.groupImage}
-            src="https://c.animaapp.com/E93a9PUr/img/group-3048.png"
+            src={bgImage}
             alt="Group"
             loading="lazy"
           />
