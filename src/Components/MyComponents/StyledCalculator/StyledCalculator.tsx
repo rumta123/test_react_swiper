@@ -1,4 +1,4 @@
-import React, { useState, type ChangeEvent, type FormEvent } from "react";
+import React, { useState, type FormEvent } from "react";
 
 // ✅ Типизация Yandex Metrika
 declare global {
@@ -32,6 +32,9 @@ const categories: Category[] = [
       { id: 2, name: "Редизайн", price: 15000 },
       { id: 3, name: "Адаптивная верстка", price: 25000 },
       { id: 4, name: "SEO-оптимизация", price: 15000 },
+      { id: 17, name: "разработка с 0", price: 30000 },
+      { id: 18, name: "Доработка", price: 2500 },
+      { id: 19, name: "Консультация", price: 0 },
     ],
   },
   {
@@ -87,44 +90,54 @@ interface Payload {
   contactMethod: string;
   contactValue: string;
   message: string;
+  fieldErrors?: Record<string, string>;
 }
 
 const StyledCalculator: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [selectedServices, setSelectedServices] = useState<number[]>([]);
-  const [name, setName] = useState<string>("");
-  const [contactMethod, setContactMethod] = useState<string>("email");
-  const [contactValue, setContactValue] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<string>("");
+  const [name, setName] = useState("");
+  const [contactMethod, setContactMethod] = useState("email");
+  const [contactValue, setContactValue] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const [fieldErrors, setFieldErrors] = useState<{
+    name?: string;
+    contactValue?: string;
+    category?: string;
+    services?: string;
+  }>({});
 
   const currentCategory = categories.find((c) => c.name === selectedCategory);
 
-  const currentServices = selectedSubCategory
-    ? currentCategory?.subCategories?.find(
-        (sc) => sc.name === selectedSubCategory
-      )?.services || []
-    : currentCategory?.services || [];
+  const currentServices =
+    selectedSubCategory
+      ? currentCategory?.subCategories?.find((sc) => sc.name === selectedSubCategory)?.services || []
+      : currentCategory?.services || [];
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setSelectedSubCategory("");
     setSelectedServices([]);
+    setFieldErrors((prev) => ({ ...prev, category: undefined, services: undefined }));
   };
 
   const handleSubCategoryChange = (subCategory: string) => {
     setSelectedSubCategory(subCategory);
     setSelectedServices([]);
+    setFieldErrors((prev) => ({ ...prev, services: undefined }));
   };
 
   const handleServiceChange = (serviceId: number) => {
-    setSelectedServices((prev) =>
-      prev.includes(serviceId)
-        ? prev.filter((id) => id !== serviceId)
-        : [...prev, serviceId]
-    );
+    setSelectedServices((prev) => {
+      const next = prev.includes(serviceId) ? prev.filter((id) => id !== serviceId) : [...prev, serviceId];
+      return next;
+    });
+    setFieldErrors((prev) => ({ ...prev, services: undefined }));
   };
 
   const calculateTotal = (): number => {
@@ -133,10 +146,68 @@ const StyledCalculator: React.FC = () => {
       .reduce((sum, s) => sum + s.price, 0);
   };
 
+  // возвращает пустую строку, если всё ок, иначе текст ошибки
+  const getContactError = (method: string, value: string): string => {
+    const v = value.trim();
+    if (!v) return "Поле контакта не заполнено";
+
+    switch (method) {
+      case "email":
+        return /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(v) ? "" : "Введите корректный email";
+      case "phone":
+      case "whatsapp": {
+        const cleaned = v.replace(/[^\d+]/g, ""); // убираем всё, кроме цифр и плюса
+        let normalized = cleaned;
+
+        if (/^\d{10}$/.test(cleaned)) {
+          // номер вроде 9206403828 => добавляем +7
+          normalized = "+7" + cleaned;
+        } else if (cleaned.startsWith("8")) {
+          normalized = "+7" + cleaned.slice(1);
+        }
+
+        return /^\+?\d{11,15}$/.test(normalized)
+          ? ""
+          : "Введите корректный номер телефона (например, 89206403828, +79206403828 или 9206403828)";
+      }
+      case "telegram":
+        return (/^@?[A-Za-z0-9_]{5,}$/.test(v) || /^https:\/\/t\.me\/[A-Za-z0-9_]+$/.test(v)) ? "" : "Введите @username или ссылку https://t.me/username";
+      case "vk":
+        return /^https:\/\/vk\.com\/[A-Za-z0-9_]+$/.test(v) ? "" : "Введите ссылку вида https://vk.com/username";
+      default:
+        return "Неверный способ связи";
+    }
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setError("");
     setSuccess("");
+    const errs: typeof fieldErrors = {};
+
+    if (!selectedCategory) {
+      errs.category = "Выберите категорию";
+    }
+
+    if (selectedServices.length === 0) {
+      errs.services = "Выберите хотя бы одну услугу";
+    }
+
+    if (!name.trim()) {
+      errs.name = "Введите имя";
+    }
+
+    const contactErr = getContactError(contactMethod, contactValue);
+    if (contactErr) {
+      errs.contactValue = contactErr;
+    }
+
+    setFieldErrors(errs);
+
+    if (Object.keys(errs).length > 0) {
+      setError("Проверьте правильность заполнения полей.");
+      return;
+    }
 
     const payload: Payload = {
       category: selectedCategory,
@@ -145,42 +216,110 @@ const StyledCalculator: React.FC = () => {
         .filter((s) => selectedServices.includes(s.id))
         .map((s) => s.name),
       totalPrice: calculateTotal(),
-      name,
+      name: name.trim(),
       contactMethod,
-      contactValue,
-      message,
+      contactValue: contactValue.trim(),
+      message: message.trim(),
     };
 
+    setLoading(true);
     try {
-      const response = await fetch("https://your-backend.com/api/send-form", {
+      const response = await fetch("https://parser24.ru/send.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        // 🔹 Событие Яндекс.Метрики без any
         if (typeof window !== "undefined" && window.ym) {
           window.ym(104386783, "reachGoal", "send_form");
         }
-
-        setSuccess("Заявка успешно отправлена!");
+        setSuccess("✅ Заявка успешно отправлена!");
         setName("");
         setContactValue("");
         setMessage("");
         setSelectedCategory("");
         setSelectedSubCategory("");
         setSelectedServices([]);
+        setFieldErrors({});
       } else {
-        setSuccess("Ошибка при отправке заявки. Попробуйте позже.");
+        setError("Ошибка при отправке заявки. Попробуйте позже.");
       }
     } catch (err) {
       console.error(err);
-      setSuccess("Ошибка при отправке заявки. Попробуйте позже.");
+      setError("Ошибка при отправке заявки. Попробуйте позже.");
     }
-
     setLoading(false);
   };
+  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setSuccess("");
+
+  //   // Проверяем корректность
+  //   const fieldErrors: Record<string, string> = {};
+
+  //   if (!selectedCategory) fieldErrors.category = "Выберите категорию";
+  //   if (selectedServices.length === 0) fieldErrors.services = "Выберите хотя бы одну услугу";
+  //   if (!name.trim()) fieldErrors.name = "Введите имя";
+  //   if (!validateContact(contactMethod, contactValue))
+  //     fieldErrors.contactValue = "Введите корректные контактные данные";
+
+  //   // Подсвечивание
+  //   setError(Object.values(fieldErrors).join(", "));
+
+  //   // Формируем полезную нагрузку для сервера
+  //   const payload: Payload = {
+  //     category: selectedCategory,
+  //     subCategory: selectedSubCategory || undefined,
+  //     services: currentServices
+  //       .filter((s) => selectedServices.includes(s.id))
+  //       .map((s) => s.name),
+  //     totalPrice: calculateTotal(),
+  //     name: name.trim(),
+  //     contactMethod,
+  //     contactValue: contactValue.trim(),
+  //     message: message.trim(),
+  //     fieldErrors, // можно отправить ошибки для аналитики
+  //   };
+
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch("https://parser24.ru/send.php", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(payload),
+  //     });
+
+  //     if (response.ok) {
+  //       const isValid = Object.keys(fieldErrors).length === 0;
+  //       if (isValid && typeof window !== "undefined" && window.ym) {
+  //         // Отправляем только корректные заявки
+  //         window.ym(104386783, "reachGoal", "send_form");
+  //       }
+
+  //       setSuccess(
+  //         isValid
+  //           ? "✅ Заявка успешно отправлена!"
+  //           : "⚠️ Данные отправлены, но есть ошибки в форме."
+  //       );
+  //       if (isValid) {
+  //         setName("");
+  //         setContactValue("");
+  //         setMessage("");
+  //         setSelectedCategory("");
+  //         setSelectedSubCategory("");
+  //         setSelectedServices([]);
+  //       }
+  //     } else {
+  //       setError("Ошибка при отправке заявки. Попробуйте позже.");
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     setError("Ошибка при отправке заявки. Попробуйте позже.");
+  //   }
+  //   setLoading(false);
+  // };
 
   return (
     <div
@@ -203,7 +342,7 @@ const StyledCalculator: React.FC = () => {
           flexWrap: "wrap",
           gap: 10,
           justifyContent: "center",
-          marginBottom: 20,
+          marginBottom: 8,
         }}
       >
         {categories.map((cat) => (
@@ -215,8 +354,7 @@ const StyledCalculator: React.FC = () => {
               borderRadius: 8,
               fontWeight: "bold",
               cursor: "pointer",
-              backgroundColor:
-                selectedCategory === cat.name ? "#007BFF" : "#EEE",
+              backgroundColor: selectedCategory === cat.name ? "#007BFF" : "#EEE",
               color: selectedCategory === cat.name ? "#FFF" : "#333",
               border: "none",
             }}
@@ -225,6 +363,7 @@ const StyledCalculator: React.FC = () => {
           </button>
         ))}
       </div>
+      {fieldErrors.category && <div style={{ color: "red", textAlign: "center", marginBottom: 8 }}>{fieldErrors.category}</div>}
 
       {/* Подкатегории */}
       {currentCategory?.subCategories && (
@@ -234,7 +373,7 @@ const StyledCalculator: React.FC = () => {
             flexWrap: "wrap",
             gap: 10,
             justifyContent: "center",
-            marginBottom: 20,
+            marginBottom: 16,
           }}
         >
           {currentCategory.subCategories.map((sub) => (
@@ -245,8 +384,7 @@ const StyledCalculator: React.FC = () => {
                 padding: "6px 12px",
                 borderRadius: 6,
                 cursor: "pointer",
-                backgroundColor:
-                  selectedSubCategory === sub.name ? "#28A745" : "#DDD",
+                backgroundColor: selectedSubCategory === sub.name ? "#28A745" : "#DDD",
                 color: selectedSubCategory === sub.name ? "#FFF" : "#333",
                 border: "none",
               }}
@@ -259,57 +397,61 @@ const StyledCalculator: React.FC = () => {
 
       {/* Услуги */}
       {currentServices.length > 0 && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 10,
-            marginBottom: 20,
-          }}
-        >
-          {currentServices.map((service) => (
-            <div
-              key={service.id}
-              onClick={() => handleServiceChange(service.id)}
-              style={{
-                padding: 10,
-                border: "1px solid #999",
-                borderRadius: 8,
-                cursor: "pointer",
-                backgroundColor: selectedServices.includes(service.id)
-                  ? "#D0E7FF"
-                  : "#FFF",
-              }}
-            >
-              <p style={{ margin: 0, fontWeight: "bold" }}>{service.name}</p>
-              <p style={{ margin: 0 }}> {service.price} руб.</p>
-            </div>
-          ))}
-        </div>
+        <>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 10,
+              marginBottom: 8,
+            }}
+          >
+            {currentServices.map((service) => (
+              <div
+                key={service.id}
+                onClick={() => handleServiceChange(service.id)}
+                style={{
+                  padding: 10,
+                  border: `1px solid ${selectedServices.includes(service.id) ? "#007BFF" : "#999"}`,
+                  borderRadius: 8,
+                  cursor: "pointer",
+                  backgroundColor: selectedServices.includes(service.id) ? "#D0E7FF" : "#FFF",
+                }}
+              >
+                <p style={{ margin: 0, fontWeight: "bold" }}>{service.name}</p>
+                <p style={{ margin: 0 }}>{service.price} руб.</p>
+              </div>
+            ))}
+          </div>
+          {fieldErrors.services && <div style={{ color: "red", textAlign: "center", marginBottom: 8 }}>{fieldErrors.services}</div>}
+        </>
       )}
 
       {/* Форма */}
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: 10 }}
-      >
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <input
           type="text"
           placeholder="Имя"
           value={name}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setName(e.target.value)
-          }
+          onChange={(e) => {
+            setName(e.target.value);
+            setFieldErrors((prev) => ({ ...prev, name: undefined }));
+          }}
           required
-          style={{ padding: 8, borderRadius: 6, border: "1px solid #999" }}
+          style={{
+            padding: 8,
+            borderRadius: 6,
+            border: `1px solid ${fieldErrors.name ? "red" : "#999"}`,
+          }}
         />
+        {fieldErrors.name && <div style={{ color: "red", fontSize: 12 }}>{fieldErrors.name}</div>}
 
-        {/* Выбор способа связи */}
         <select
           value={contactMethod}
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+          onChange={(e) => {
             setContactMethod(e.target.value);
             setContactValue("");
+            setFieldErrors((prev) => ({ ...prev, contactValue: undefined }));
           }}
           style={{ padding: 8, borderRadius: 6, border: "1px solid #999" }}
         >
@@ -326,26 +468,31 @@ const StyledCalculator: React.FC = () => {
             contactMethod === "email"
               ? "Введите email"
               : contactMethod === "phone"
-              ? "Введите номер телефона"
-              : contactMethod === "whatsapp"
-              ? "Введите номер WhatsApp"
-              : contactMethod === "telegram"
-              ? "Введите @username или ссылку на Telegram"
-              : "Введите ссылку на VK"
+                ? "Введите номер телефона (+79991234567)"
+                : contactMethod === "whatsapp"
+                  ? "Введите номер WhatsApp"
+                  : contactMethod === "telegram"
+                    ? "Введите @username или ссылку"
+                    : "Введите ссылку на VK"
           }
           value={contactValue}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setContactValue(e.target.value)
-          }
+          onChange={(e) => {
+            setContactValue(e.target.value);
+            setFieldErrors((prev) => ({ ...prev, contactValue: undefined }));
+          }}
           required
-          style={{ padding: 8, borderRadius: 6, border: "1px solid #999" }}
+          style={{
+            padding: 8,
+            borderRadius: 6,
+            border: `1px solid ${fieldErrors.contactValue ? "red" : "#999"}`,
+          }}
         />
+        {fieldErrors.contactValue && <div style={{ color: "red", fontSize: 12 }}>{fieldErrors.contactValue}</div>}
+
         <textarea
           placeholder="Сообщение"
           value={message}
-          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-            setMessage(e.target.value)
-          }
+          onChange={(e) => setMessage(e.target.value)}
           style={{
             padding: 8,
             borderRadius: 6,
@@ -360,6 +507,9 @@ const StyledCalculator: React.FC = () => {
             примерно {calculateTotal()} руб.
           </span>
         </div>
+
+        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+        {success && <p style={{ color: "green", textAlign: "center" }}>{success}</p>}
 
         <button
           type="submit"
@@ -377,12 +527,6 @@ const StyledCalculator: React.FC = () => {
         >
           {loading ? "Отправка..." : "Отправить заявку"}
         </button>
-
-        {success && (
-          <p style={{ color: "green", textAlign: "center", marginTop: 10 }}>
-            {success}
-          </p>
-        )}
       </form>
     </div>
   );
