@@ -12,8 +12,8 @@ import {
 } from "../MyComponents";
 // import HierarchicalCalculator from "../MyComponents/HierarchicalCalculator/HierarchicalCalculator";
 
-import Testimonials from "../Testimonial/Testimonial";
-import WhyUs from "../WhyUs/WhyUs";
+import Testimonials from "../MyComponents/Testimonial/Testimonial";
+import WhyUs from "../MyComponents/WhyUs/WhyUs";
 import Footer from "../MyComponents/Footer/Footer";
 import StyledCalculator from "../MyComponents/StyledCalculator/StyledCalculator";
 import PortfolioPreview from "../MyComponents/PortfolioPreview/PortfolioPreview";
