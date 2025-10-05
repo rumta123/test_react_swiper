@@ -61,8 +61,17 @@ const categories: Category[] = [
       {
         name: "Приложения",
         services: [
-          { id: 11, name: "Мобильное приложение", price: 70000 },
+          { id: 11, name: "Мобильное приложение android", price: 70000 },
+          { id: 15, name: "Мобильное приложение ios", price: 100000 },
           { id: 12, name: "Web-приложение", price: 70000 },
+          { id: 16, name: "Телеграм приложение", price: 20000 },
+        ],
+      },
+      {
+        name: "Парсеры",
+        services: [
+          { id: 13, name: "Обычный парсер", price: 15000 },
+          { id: 14, name: "Сложный парсер", price: 30000 },
         ],
       },
     ],
@@ -93,12 +102,11 @@ const StyledCalculator: React.FC = () => {
 
   const currentCategory = categories.find((c) => c.name === selectedCategory);
 
-  const currentServices =
-    selectedSubCategory
-      ? currentCategory?.subCategories?.find(
-          (sc) => sc.name === selectedSubCategory
-        )?.services || []
-      : currentCategory?.services || [];
+  const currentServices = selectedSubCategory
+    ? currentCategory?.subCategories?.find(
+        (sc) => sc.name === selectedSubCategory
+      )?.services || []
+    : currentCategory?.services || [];
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -348,7 +356,9 @@ const StyledCalculator: React.FC = () => {
 
         <div style={{ fontWeight: "bold", marginTop: 10 }}>
           Общая стоимость:{" "}
-          <span style={{ color: "#007BFF" }}>примерно {calculateTotal()} руб.</span>
+          <span style={{ color: "#007BFF" }}>
+            примерно {calculateTotal()} руб.
+          </span>
         </div>
 
         <button
