@@ -1,22 +1,5 @@
-// === Переменные ===
-$bg-white: #ffffff;
-$color-blue: #5d5fef;
-$color-pink: #ef5da8;
-$color-black-blue: #42567a;
-$color-gray-border: rgba(48, 62, 88, 0.5);
-$color-white-smoke: #f4f5f9;
-$color-shadow: rgba(56, 119, 238, 0.1);
-
-$font-pt-sans: "PT Sans", Helvetica, sans-serif;
-$font-bebas-neue: "Bebas Neue", Helvetica, sans-serif;
-
-$width-container: 100vw;
-$height-screen: auto;
-$vh-100: 100vh;
-
-// === Стили ===
 .wrapper {
-  background: $bg-white;
+  background: #ffffff;
   display: grid;
   justify-items: center;
   align-items: start;
@@ -25,9 +8,9 @@ $vh-100: 100vh;
 }
 
 .container {
-  background: $bg-white;
-  width: $width-container;
-  height: $vh-100;
+  background: #ffffff;
+  width: 100vw;
+  height: 100vh;
 }
 
 .background {
@@ -36,13 +19,15 @@ $vh-100: 100vh;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-.group2{
+
+.group2 {
   width: auto;
 }
+
 .groupImage {
   position: absolute;
   width: 1441px;
-  height: $height-screen;
+  height: auto;
   top: 0;
   left: 320px;
 }
@@ -51,7 +36,7 @@ $vh-100: 100vh;
   position: absolute;
   top: 399px;
   left: 537px;
-  font-family: $font-pt-sans;
+  font-family: "PT Sans", Helvetica, sans-serif;
   font-weight: bold;
   font-size: clamp(60px, 12vw, 200px);
   line-height: 160px;
@@ -60,14 +45,13 @@ $vh-100: 100vh;
   letter-spacing: -4px;
 }
 
-// Отдельные классы для цветов
 .yearBlue {
-  color: $color-blue;
+  color: #5d5fef;
   letter-spacing: -8px;
 }
 
 .yearPink {
-  color: $color-pink;
+  color: #ef5da8;
   letter-spacing: -8px;
 }
 
@@ -92,7 +76,7 @@ $vh-100: 100vh;
   position: absolute;
   top: 227px;
   left: 1196px;
-  font-family: $font-pt-sans;
+  font-family: "PT Sans", Helvetica, sans-serif;
   font-weight: bold;
   font-size: 20px;
   line-height: 30px;
@@ -104,29 +88,27 @@ $vh-100: 100vh;
   position: absolute;
   width: 324px;
   height: 135px;
-
-  &Text {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    font-family: $font-pt-sans;
-    font-size: 20px;
-    line-height: 30px;
-    color: #000c3e;
-    font-weight: normal;
-    width: 320px;
-  }
-
-  &Year {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-family: $font-bebas-neue;
-    font-size: 25px;
-    line-height: 30px;
-    font-weight: normal;
-    color: #ef5da8;
-  }
+}
+.blockText {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  font-family: "PT Sans", Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000c3e;
+  font-weight: normal;
+  width: 320px;
+}
+.blockYear {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Bebas Neue", Helvetica, sans-serif;
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: normal;
+  color: #ef5da8;
 }
 
 .circle {
@@ -135,8 +117,8 @@ $vh-100: 100vh;
   left: 1126px;
   width: 56px;
   height: 56px;
-  background: $color-white-smoke;
-  border: 1px solid $color-gray-border;
+  background: #f4f5f9;
+  border: 1px solid rgba(48, 62, 88, 0.5);
   border-radius: 50%;
   transform: rotate(90deg);
 }
@@ -152,7 +134,7 @@ $vh-100: 100vh;
   font-weight: 700;
   font-size: 56px;
   line-height: 120%;
-  color: $color-black-blue;
+  color: #42567a;
 }
 
 .vectorLine {
@@ -171,7 +153,7 @@ $vh-100: 100vh;
   left: 1680px;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 0 15px $color-shadow;
+  box-shadow: 0 0 15px rgba(56, 119, 238, 0.1);
 }
 
 .roundArrow {
@@ -188,46 +170,42 @@ $vh-100: 100vh;
   height: 88px;
   top: 697px;
   left: 400px;
-
-  .dateLabel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-family: $font-pt-sans;
-    font-size: 14px;
-    color: $color-black-blue;
-  }
-
-  .icon {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 38px;
-    left: 70px;
-  }
 }
+.dateBlock .dateLabel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "PT Sans", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #42567a;
+}
+.dateBlock .icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 38px;
+  left: 70px;
+}
+
 @media (max-width: 1300px) {
   .maskImage {
     display: none;
   }
 }
 @media (max-width: 768px) {
-
-
-  .block {
-  &__text {   width: 100px;   font-size: 16px;
-  overflow-wrap: break-word;}
-  &__year {  font-size: 18px; }
-}
- 
+  .block__text {
+    width: 100px;
+    font-size: 16px;
+    overflow-wrap: break-word;
+  }
+  .block__year {
+    font-size: 18px;
+  }
   .yearBlue {
-
-  letter-spacing: 0px;
-}
-
-
-.yearPink {
-  color: $color-pink;
-  letter-spacing: 0px;
-}
-}
+    letter-spacing: 0px;
+  }
+  .yearPink {
+    color: #ef5da8;
+    letter-spacing: 0px;
+  }
+}/*# sourceMappingURL=Desktop.module.css.map */

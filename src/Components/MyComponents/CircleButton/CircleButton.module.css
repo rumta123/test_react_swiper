@@ -1,0 +1,18 @@
+.smallText {
+  position: absolute;
+  font-family: "PT Sans", Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000c3e;
+  font-weight: normal;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}/*# sourceMappingURL=CircleButton.module.css.map */

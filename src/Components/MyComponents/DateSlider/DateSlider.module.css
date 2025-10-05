@@ -1,0 +1,78 @@
+.dateSlider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.dateSlider .arrows {
+  display: flex;
+  gap: 8px;
+}
+.dateSlider .currentDate {
+  font-family: "PT Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #42567a;
+}
+
+.arrowButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #000;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+}
+.arrowButton:hover:not(:disabled) {
+  opacity: 1;
+}
+.arrowButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.swiperWrapper {
+  width: 120px;
+  overflow: hidden;
+}
+
+.swiperSlide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dateBlock {
+  text-align: center;
+}
+.dateBlock .dateLabel {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.arrowPrev {
+  order: -1;
+}
+
+.arrowNext {
+  order: 1;
+  transform: rotate(180deg);
+}/*# sourceMappingURL=DateSlider.module.css.map */

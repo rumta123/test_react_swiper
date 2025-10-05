@@ -4,7 +4,7 @@ import gsap from "gsap";
 import styles from "./CirclePoints.module.scss";
 import type { RootState } from "../../../store/store";
 import { selectPoint } from "../../../store/pointSlice";
-import bgImage from '../../../assets/group-3048.png';
+
 interface Item {
   id: number;
   label: string;
@@ -170,7 +170,7 @@ export const CirclePoints = ({ className, r = 140, viewBoxSize = 210 }: CirclePo
             height="100%"
           >
             <image
-              href={bgImage}
+              href="/assets/group-3048.png"
               x="-60"
               y="-60"
               width="120"

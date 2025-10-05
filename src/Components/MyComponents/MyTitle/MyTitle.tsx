@@ -8,9 +8,9 @@ interface TitleProps {
 export const MyTitle = ({ className  }: TitleProps) => {
   return (
     <div className={className}>
-      Что
+      Работем
       <br />
-      умеем
+      честно
     </div>
   );
 };

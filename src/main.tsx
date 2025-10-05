@@ -6,6 +6,7 @@ import { Desktop } from './Components/Dectop/Desktop';
 import { Mobile } from './Components/Mobile/Mobile';
 import { useIsMobile } from "./hooks/useIsMobile";
 import "./styles/swiper.css";
+import './styles/global.scss';
 export const App = () => {
   const isMobile = useIsMobile(768);
   return (
