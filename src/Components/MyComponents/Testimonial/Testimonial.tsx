@@ -64,6 +64,21 @@ const Testimonials: React.FC = () => {
             <p style={{ fontSize: 14, lineHeight: 1.5 }}>{t.text}</p>
           </div>
         ))}
+        <div style={{ textAlign: "center", marginTop: 20 }}>
+          <a
+            href="/otzyvy/" // ссылка на отдельную страницу портфолио
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#007BFF",
+              color: "#FFF",
+              borderRadius: 8,
+              textDecoration: "none",
+              fontWeight: "bold"
+            }}
+          >
+            Смотреть всё
+          </a>
+        </div>
       </div>
     </div>
   );
