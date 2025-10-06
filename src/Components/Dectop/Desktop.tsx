@@ -76,6 +76,18 @@ export const Desktop: React.FC = () => {
       </div>
       {/* <HierarchicalCalculator/> 
        */}
+         <div
+      style={{
+        maxWidth: 600,
+        margin: "20px auto",
+        padding: 20,
+        border: "1px solid #ccc",
+        borderRadius: 10,
+      }}
+    >
+      <h3>Поздравляем, вы прошли испытание! Значит, вы не рекламный бот, а настоящий пользователь. Калькулятор уже ждёт вас 🧮✨</h3>
+    </div>
+       
       <StyledCalculator/>
       <PortfolioPreview/>
       <Testimonials/>
