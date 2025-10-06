@@ -45,7 +45,7 @@ const PortfolioPreview: React.FC = () => {
       </div>
       <div style={{ textAlign: "center", marginTop: 20 }}>
         <a
-          href="/portfolio" // ссылка на отдельную страницу портфолио
+          href="/portfolio/" // ссылка на отдельную страницу портфолио
           style={{
             padding: "10px 20px",
             backgroundColor: "#007BFF",
